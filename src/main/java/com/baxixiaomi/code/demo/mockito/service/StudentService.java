@@ -5,14 +5,22 @@ import com.baxixiaomi.code.demo.mockito.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public class StudentService {
 
-    @Autowired
-    StudentDao studentDao;
 
-    public Student getStudent(int age) {
-        return studentDao.getStudentById(age);
+     StudentDao studentDao;
+
+    public StudentService(StudentDao studentDao) {
+        this.studentDao = studentDao;
     }
 
+    public String getStudent(int id) {
+        Student studentById = studentDao.getStudentById(id);
+        if (null == studentById) {
+            return "failed";
+        } else {
+            return "success";
+        }
+    }
 }

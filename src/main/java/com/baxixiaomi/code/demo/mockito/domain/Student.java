@@ -19,6 +19,9 @@ public class Student {
         this.age = age;
     }
 
+    public Student() {
+    }
+
     public int getId() {
         return id;
     }
