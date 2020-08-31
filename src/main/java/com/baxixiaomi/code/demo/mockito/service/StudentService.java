@@ -11,8 +11,15 @@ public class StudentService {
         this.studentDao = studentDao;
     }
 
-    public Student getStudent() {
-        return studentDao.getStudentById();
+    public boolean getStudent(int id, String name) {
+        Student fetchStudent = studentDao.fetchStudent(id);
+        if (null != fetchStudent) {
+            Student student = new Student(fetchStudent.getId(), name);
+            studentDao.updateStudent(student);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

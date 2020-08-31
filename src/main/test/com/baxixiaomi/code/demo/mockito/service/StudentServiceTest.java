@@ -5,30 +5,32 @@ import com.baxixiaomi.code.demo.mockito.domain.Student;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StudentServiceTest {
 
+    @Mock
     private StudentDao studentDao;
 
     private StudentService studentService;
 
     @Before
-    public void setUp() throws Exception {
-        this.studentDao = Mockito.mock(StudentDao.class);
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
         this.studentService = new StudentService(studentDao);
     }
 
     @Test
     public void getStudent() {
-        Student student = new Student();
-        when(studentService.getStudent()).thenReturn(student);
-
-        assertNotNull(student);
+        Student student = new Student(1, "jamie");
+        when(studentDao.fetchStudent(1)).thenReturn(student);
+        boolean jamie = studentService.getStudent(1, "jamie");
+        assertTrue(jamie);
     }
 }
