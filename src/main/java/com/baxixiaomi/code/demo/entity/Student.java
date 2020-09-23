@@ -15,9 +15,14 @@ import java.util.Date;
 @Data
 @Getter
 @Setter
-public class Student {
+public class Student  {
     private String username;
     private Date birthday;
 
+    public Student(String username) {
+        this.username = username;
+    }
 
+    public Student() {
+    }
 }
